@@ -1,0 +1,16 @@
+{
+	"name": "Exercise 4 - Investigate query performance",
+	"properties": {
+		"content": {
+			"query": "SELECT  count(*) from wwi_perf.FactSale_Slow\r\n\r\nSELECT  count(*) from wwi_perf.FactSale_Fast\r\n\r\nSELECT\r\n    FS.CustomerKey\r\n    ,MIN(FS.Quantity) as MinQuantity\r\n    ,MAX(FS.Quantity) as MaxQuantity\r\n    ,AVG(FS.TaxRate) as AvgTaxRate\r\n    ,AVG(FS.TaxAmount) as AvgTaxAmount\r\n    ,AVG(FS.TotalExcludingTax) as AverageSaleWithoutTax\r\n    ,AVG(FS.TotalIncludingTax) as AverageSaleWithTax\r\n    ,COUNT(DISTINCT FS.StockItemKey) as DistinctStockItems\r\n    ,COUNT(DISTINCT DC.Country) as DistinctCountries\r\nFROM\r\n    wwi_perf.FactSale_Slow FS\r\n    join wwi.DimCity DC ON\r\n        DC.CityKey = FS.CityKey\r\nGROUP BY\r\n    FS.CustomerKey\r\n\r\nSELECT\r\n    FS.CustomerKey\r\n    ,MIN(FS.Quantity) as MinQuantity\r\n    ,MAX(FS.Quantity) as MaxQuantity\r\n    ,AVG(FS.TaxRate) as AvgTaxRate\r\n    ,AVG(FS.TaxAmount) as AvgTaxAmount\r\n    ,AVG(FS.TotalExcludingTax) as AverageSaleWithoutTax\r\n    ,AVG(FS.TotalIncludingTax) as AverageSaleWithTax\r\n    ,COUNT(DISTINCT FS.StockItemKey) as DistinctStockItems\r\n    ,COUNT(DISTINCT DC.Country) as DistinctCountries\r\nFROM\r\n    wwi_perf.FactSale_Fast FS\r\n    join wwi.DimCity DC ON\r\n        DC.CityKey = FS.CityKey\r\nGROUP BY\r\n    FS.CustomerKey",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

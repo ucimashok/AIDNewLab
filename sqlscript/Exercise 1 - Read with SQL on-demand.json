@@ -1,0 +1,16 @@
+{
+	"name": "Exercise 1 - Read with SQL on-demand",
+	"properties": {
+		"content": {
+			"query": "SELECT\r\n    COUNT(*)\r\nFROM\r\n    OPENROWSET(\r\n        BULK 'https://asadatalake453562.dfs.core.windows.net/wwi/factsale-csv/2012/Q1/*/*',\r\n \t\tFORMAT = 'CSV', \r\n\t\tFIELDTERMINATOR ='|', \r\n        FIELDQUOTE = '',\r\n\t\tFIRSTROW = 2\r\n    ) \r\nWITH \r\n    (\r\n        SalesKey BIGINT,\r\n        CityKey INT,\r\n        CustomerKey INT,\r\n        BillToCustomerKey INT,\r\n        StockItemKey INT,\r\n        DeliveryDateKey DATE,\r\n        SalesPersonKey INT,\r\n        WWIInvoiceID INT,\r\n        Description VARCHAR(200),\r\n        Package VARCHAR(10),\r\n        Quantity INT,\r\n        UnitPrice DECIMAL(6,2),\r\n        TaxRate DECIMAL(6,2),\r\n        TotalExcludingTax DECIMAL(6,2),\r\n        TaxAmount DECIMAL(6,2),\r\n        Profit DECIMAL(6,2),\r\n        TotalIncludingTax DECIMAL(6,2),\r\n        TotalDryItems INT,\r\n        TotalChillerItems INT,\r\n        LineageKey INT\r\n    ) as S",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "CREATE LOGIN [asa.sql.staging]\r\nWITH PASSWORD = 'password.1!!'\r\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

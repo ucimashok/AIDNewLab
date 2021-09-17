@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 3",
+	"properties": {
+		"content": {
+			"query": "CREATE USER [asa.sql.staging]\r\n    FOR LOGIN [asa.sql.staging]\r\n    WITH DEFAULT_SCHEMA = dbo\r\nGO\r\n\r\n-- Add user to the required roles\r\n\r\nEXEC sp_addrolemember N'db_datareader', N'asa.sql.staging'\r\nGO\r\n\r\nEXEC sp_addrolemember N'db_datawriter', N'asa.sql.staging'\r\nGO\r\n\r\nEXEC sp_addrolemember N'db_ddladmin', N'asa.sql.staging'\r\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

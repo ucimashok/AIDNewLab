@@ -1,0 +1,16 @@
+{
+	"name": "Exercise 4 - Analyze Transactions",
+	"properties": {
+		"content": {
+			"query": "SELECT \r\n    CustomerKey, \r\n    SUM(Quantity) as Quantity\r\nFROM \r\n    wwi.FactSale\r\nGROUP BY \r\n    CustomerKey",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

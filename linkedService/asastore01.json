@@ -1,0 +1,12 @@
+{
+	"name": "asastore01",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=asastore453562;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFTQVdPUktTUEFDRTQ1MzU2Ml9lNDRkZTlhMS1lODBlLTRiMjItOTU3MS1jYWI0NGU2MDEyNGMiDQp9"
+		}
+	}
+}

@@ -1,0 +1,93 @@
+{
+	"name": "Exercise 2 - Bonus Notebook with CSharp",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPool01",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2
+		},
+		"metadata": {
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/f9e58faa-a0d7-4009-94f1-ce42aca24741/resourceGroups/Synapse-AIAD-453562/providers/Microsoft.Synapse/workspaces/asaworkspace453562/bigDataPools/SparkPool01",
+				"name": "SparkPool01",
+				"type": "Spark",
+				"endpoint": "https://asaworkspace453562.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"// Configure the connection to the data lake\n",
+					"var adlsPath = \"abfss://wwi@asadatalake453562.dfs.core.windows.net\";"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"// Import the sales data from the data lake\n",
+					"var sales = spark.Read().Option(\"header\", \"true\").Option(\"inferSchema\", \"true\").Option(\"sep\", \"|\").Csv($\"{adlsPath}/factsale-csv/2012/Q4\");\n",
+					"sales.Show(5);\n",
+					"sales.PrintSchema();"
+				],
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"using System;\n",
+					"using System.Collections.Generic;\n",
+					"\n",
+					"// Set up a JDBC connection to Azure Synapse Analytics\n",
+					"var jdbcUsername = \"asa.sql.staging@asaworkspace453562\";\n",
+					"var jdbcPassword = \"password.1!!\";\n",
+					"var jdbcConnectionString = $\"jdbc:sqlserver://asaworkspace453562.sql.azuresynapse.net:1433;database=SQLPool01;\";\n",
+					"\n",
+					"// Set target table name\n",
+					"var tableName = $\"wwi_staging.Sale_CSharp\";\n",
+					"\n",
+					"// Write the retrieved sales data into a staging table in Azure Synapse Analytics.\n",
+					"sales\n",
+					"    .Limit(1500)\n",
+					"    .Write()\n",
+					"    .Format(\"jdbc\")\n",
+					"    .Options(\n",
+					"        new Dictionary<string, string>\n",
+					"        {\n",
+					"            {\"url\", jdbcConnectionString},\n",
+					"            {\"dbtable\", tableName},\n",
+					"            {\"user\", jdbcUsername},\n",
+					"            {\"password\", jdbcPassword},\n",
+					"            {\"encrypt\", \"false\"},\n",
+					"            {\"trustServerCertificate\", \"true\"},\n",
+					"            {\"createTableColumnTypes\", \"DeliveryDateKey VARCHAR(50), Description VARCHAR(100), Package VARCHAR(50)\"} // Override the column types for string values. They are assigned nvarchar(max) by default, and that is not compatible with columnstore index.\n",
+					"        }\n",
+					"    )\n",
+					"    .Mode(\"append\")\n",
+					"    .Save();"
+				],
+				"execution_count": null
+			}
+		]
+	}
+}

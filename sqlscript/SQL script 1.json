@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE DATABASE SQLOnDemand01\r\nCREATE CREDENTIAL [https://asadatalake453562.dfs.core.windows.net]\r\nWITH IDENTITY='User Identity';",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

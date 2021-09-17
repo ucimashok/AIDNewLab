@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 4",
+	"properties": {
+		"content": {
+			"query": "CREATE USER [asaworkspace453562] FROM EXTERNAL PROVIDER;\r\n\r\n--Granting permission to the identity\r\nGRANT CONTROL ON DATABASE::SQLPool01 TO [asaworkspace453562];",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"name": "SQLPool01",
+				"type": "SqlPool"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}
